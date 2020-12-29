@@ -1,16 +1,19 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
-const colors = document.getElementsByClassName("jsColor")
+const colors = document.getElementsByClassName("jsColor");
+const range = document.getElementById("jsRange");
+const mode = document.getElementById("jsMode");
 
 
 ctx.strokeStyle = "#2c2c2c";
-ctx.linewith = 2.5;
+ctx.lineWidth = 2.5;
 
 canvas.width = 700;
 canvas.height = 700;
 
 
 let painting = false;
+let filling = false;
 
 function stopPainting(){
     painting = false;
@@ -35,9 +38,28 @@ function onMouseMove(event){
     }
 }
 
+// input 값이 변경될때 작동하는 함수 : 색 변경
 function handleColorClick(event){
     const color = event.target.style.backgroundColor;
     ctx.strokeStyle = color;
+}
+
+// input 값이 변경될때 작동하는 함수 : 굵기 변경
+function handleRangeChange(event){
+    // console.log(event.target.value); 
+    const strokeSize = event.target.value;
+    ctx.lineWidth = strokeSize;
+}
+
+function handleModeClick(event){
+    //console.log(event);
+    if(filling === true){
+        filling = false;
+        mode.innerText = "FILL";
+    } else{
+        filling = true;
+        mode.innerText = "PAINT";
+    }
 }
 
 if(canvas){
@@ -49,3 +71,11 @@ if(canvas){
 
 Array.from(colors).forEach(color => color.addEventListener("click", handleColorClick));
 
+//if() 괄호 안에 아무거나 넣어도 돌아는 간다?
+if(range){
+    range.addEventListener("input", handleRangeChange);
+}
+
+if(mode){
+    mode.addEventListener("click", handleModeClick);
+}
