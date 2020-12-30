@@ -72,7 +72,7 @@ function handleCanvasCanvas(event){
     // console.log(event);
     if(filling){
         ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-    } 
+    }
 }
 
 //우클릭 기능 없애는 함수
@@ -94,7 +94,7 @@ function saveImage(event){
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mousedown", startPainting); /* 마우스 클릭할 때*/
-    canvas.addEventListener("mouseup", startPainting);
+    canvas.addEventListener("mouseup", stopPainting);
     canvas.addEventListener("mouseleave", stopPainting);
     canvas.addEventListener("click", handleCanvasCanvas);
     canvas.addEventListener("contextmenu", handleCM);
